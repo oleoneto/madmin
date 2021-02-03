@@ -1,6 +1,7 @@
 module Madmin
   class ResourceController < ApplicationController
     before_action :set_record, except: [:index, :new, :create]
+    before_action :set_page_title
 
     def index
       @pagy, @records = pagy(scoped_resources)
@@ -76,6 +77,10 @@ module Madmin
       else
         raise "Unrecognised param data: #{data.inspect}"
       end
+    end
+    
+    def set_page_title
+      @page_title = controller_name.capitalize
     end
   end
 end
